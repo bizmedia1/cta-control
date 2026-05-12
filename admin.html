@@ -177,59 +177,28 @@ const REPO_NAME = 'cta-control';
 
       try {
 
-        // GET CURRENT FILE SHA
-        const getFile = await fetch(
-          `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`,
-          {
-            headers: {
-              Authorization: ''
-            }
-          }
-        );
+        const update = await fetch('/api/update', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    whatsapp: newLink
+  })
+});
 
-        const fileData = await getFile.json();
+const result = await update.json();
 
-        // NEW CONTENT
-        const updatedContent = {
-          whatsapp: newLink
-        };
-
-        // ENCODE CONTENT
-        const encodedContent = btoa(
-          JSON.stringify(updatedContent, null, 2)
-        );
-
-        // UPDATE FILE
-        const update = await fetch(
-          `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`,
-          {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: ''
-            },
-            body: JSON.stringify({
-              message: 'Updated WhatsApp link',
-              content: encodedContent,
-              sha: fileData.sha
-            })
-          }
-        );
-
-        if (update.ok) {
+if (update.ok) {
 
   status.innerText = 'Link updated successfully';
 
 } else {
 
-  const errorData = await update.json();
-
-  console.log(errorData);
-
   status.innerText =
-    'Error: ' + (errorData.message || 'Update failed');
+    'Error: ' + (result.message || 'Update failed');
 
-        }
+}
 
       } catch (error) {
 
