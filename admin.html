@@ -132,8 +132,7 @@ const REPO_NAME = 'cta-control';
 
     // IMPORTANT:
     // Create a GitHub token later and paste it below
-    const GITHUB_TOKEN = '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';
-
+    
     // =============================
     // LOAD CURRENT LINK
     // =============================
@@ -183,7 +182,7 @@ const REPO_NAME = 'cta-control';
           `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`,
           {
             headers: {
-              Authorization: `Bearer ${GITHUB_TOKEN}`
+              Authorization: ''
             }
           }
         );
@@ -207,7 +206,7 @@ const REPO_NAME = 'cta-control';
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${GITHUB_TOKEN}`
+              Authorization: ''
             },
             body: JSON.stringify({
               message: 'Updated WhatsApp link',
