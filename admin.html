@@ -118,13 +118,7 @@
 
 <div class="status" id="status"></div>
 
-<div class="small">
-  Replace the placeholders inside the JavaScript:
-  <br><br>
-  <code>YOUR_GITHUB_USERNAME</code><br>
-  <code>YOUR_REPOSITORY_NAME</code><br>
-  <code>YOUR_GITHUB_TOKEN</code>
-</div>
+
 
   </div>  <script>
 
@@ -189,7 +183,7 @@ const REPO_NAME = 'cta-control';
           `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FILE_PATH}`,
           {
             headers: {
-              Authorization: `token ${GITHUB_TOKEN}`
+              Authorization: `Bearer ${GITHUB_TOKEN}`
             }
           }
         );
@@ -213,7 +207,7 @@ const REPO_NAME = 'cta-control';
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `token ${GITHUB_TOKEN}`
+              Authorization: `Bearer ${GITHUB_TOKEN}`
             },
             body: JSON.stringify({
               message: 'Updated WhatsApp link',
