@@ -218,9 +218,18 @@ const REPO_NAME = 'cta-control';
         );
 
         if (update.ok) {
-          status.innerText = 'Link updated successfully';
-        } else {
-          status.innerText = 'Update failed';
+
+  status.innerText = 'Link updated successfully';
+
+} else {
+
+  const errorData = await update.json();
+
+  console.log(errorData);
+
+  status.innerText =
+    'Error: ' + (errorData.message || 'Update failed');
+
         }
 
       } catch (error) {
